@@ -5,9 +5,9 @@
 
 case version = node['deploy-drupal']['download_drupal']['version']
 when '7' 
-  version = '7.22'
+  version = '7.29'
 when '6'
-  version = '6.28'
+  version = '6.30'
 end
 
 project_missing = node['deploy-drupal']['get_project']['path'].empty? &&
