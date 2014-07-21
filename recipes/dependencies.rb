@@ -24,18 +24,14 @@ pkgs = value_for_platform(
   'default' => %w{ libpcre3-dev php5-mcrypt}
 )
 
-# install all packages
-pkgs.each {|pkg| package ( pkg ) { action :install } }
+# Install all packages.
+pkgs.each do |pkg| 
+  package pkg do
+    action :install
+  end
+end
 
-# php_pear LWRP is installed as part of the PHP cookbook
 # Install uploadprogress for better feedback during Drupal file uploads.
-php_pear ('uploadprogress') { action :install }
-
-# deploy-drupal.ini file for custom PHP directives
-template "#{node['php']['ext_conf_dir']}/deploy-drupal.ini"  do
-  source "deploy-drupal.ini.erb"
-  mode 0644
-  owner "root"
-  group "root"
-  notifies :reload, "service[apache2]"
+php_pear 'uploadprogress' do
+  action :install
 end

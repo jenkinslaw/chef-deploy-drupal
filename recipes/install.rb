@@ -130,6 +130,7 @@ drush_install = "#{drush} site-install --debug -y\
   --account-name=#{node['deploy-drupal']['install']['admin_user']}\
   --account-pass=#{node['deploy-drupal']['install']['admin_pass']}\
   --site-name='#{node['deploy-drupal']['project_name']}'"
+
 # drush si is invoked without --db-url since it is only needed for creating
 # the schemas if the database remains empty after loading the sql dump, if any.
 execute "drush-site-install" do
@@ -138,7 +139,18 @@ execute "drush-site-install" do
   only_if db_empty
   notifies :run, "execute[post-install-script]"
 end
-# the following resource is executed on every provision
+
+
+# Deploy-drupal.ini file for custom PHP directives.
+template "#{node['php']['ext_conf_dir']}/deploy-drupal.ini"  do
+  source "deploy-drupal.ini.erb"
+  mode 0644
+  owner "root"
+  group "root"
+  notifies :reload, "service[apache2]"
+end
+
+# The following resource is executed on every provision.
 bash "finish-provision" do
   cwd node['deploy-drupal']['drupal_root']
   code <<-EOH
