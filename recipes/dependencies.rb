@@ -16,7 +16,7 @@ end
 
 pkgs = value_for_platform(
   [ 'centos', 'redhat', 'fedora' ] => { #TODO needs testing
-    'default' => %w{ pcre-devel php-mcrypt }
+    'default' => %w{ pcre-devel php-mcrypt php-pear }
   },
   [ 'debian', 'ubuntu' ] => {
     'default' => %w{ libpcre3-dev php5-mcrypt }
@@ -25,7 +25,7 @@ pkgs = value_for_platform(
 )
 
 # Install all packages.
-pkgs.each do |pkg| 
+pkgs.each do |pkg|
   package pkg do
     action :install
   end
