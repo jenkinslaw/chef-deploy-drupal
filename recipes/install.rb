@@ -127,10 +127,10 @@ end
 drush = "PHP_OPTIONS='-d sendmail_path=/bin/true' drush"
 
 drush_install = "#{drush} site-install --debug -y\
-  --account-name=#{node['deploy-drupal']['install']['admin_user']}\
-  --account-pass=#{node['deploy-drupal']['install']['admin_pass']}\
-  --db-su=#{node['deploy-drupal']['install']['db_su']}\
-  --db-su-pwd=#{node['deploy-drupal']['install']['db_su_pwd']}\
+  --account-name='#{node['deploy-drupal']['install']['admin_user']}'\
+  --account-pass='#{node['deploy-drupal']['install']['admin_pass']}'\
+  --db-su='#{node['deploy-drupal']['install']['db_su']}'\
+  --db-su-pwd='#{node['deploy-drupal']['install']['db_su_pwd']}'\
   --site-name='#{node['deploy-drupal']['project_name']}'"
 
 # drush si is invoked without --db-url since it is only needed for creating
