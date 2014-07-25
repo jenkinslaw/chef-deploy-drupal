@@ -32,5 +32,5 @@ if project_missing
     cwd tmp_dir
     command "tar -xzf drupal-#{version}.tar.gz -C #{node['deploy-drupal']['project_name']}/site --strip-components=1"
   end
-  node.set['deploy-drupal']['get_project']['path'] = tmp_dir + "/" +node['deploy-drupal']['project_name']
+  node.set['deploy-drupal']['get_project']['path'] = "#{tmp_dir}/#{node['deploy-drupal']['project_name']}"
 end
