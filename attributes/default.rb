@@ -4,7 +4,8 @@ include_attribute 'deploy-drupal::get_project'
 include_attribute 'deploy-drupal::install'
 include_attribute 'deploy-drupal::download_drupal'
 
-default['deploy-drupal']['version'] = '7'
+default['deploy-drupal']['version'] = '6'
+default['deploy-drupal']['minor_version'] = '30'
 
 # must be consistent with node['apache']['listen_ports']
 default['deploy-drupal']['apache_port'] = '80' 
