@@ -2,7 +2,7 @@
 ## Recipe:: download_drupal
 ##
 ## download drupal.
-version = "#{node['deploy-drupal']['version']}.#{node['deploy-drupal']['minor_version']}"
+version = "#{node['deploy-drupal']['download']['version']}.#{node['deploy-drupal']['download']['minor_version']}"
 tmp_dir = Chef::Config[:file_cache_path]
 repo_url = "http://ftp.drupal.org/files/projects"
 
@@ -14,6 +14,7 @@ remote_file "#{tmp_dir}/drupal-#{version}.tar.gz" do
   source "#{repo_url}/drupal-#{version}.tar.gz"
   mode 0644
   action "create_if_missing"
+  checksum node["deploy-drupal"]["download"]["checksum"]
 end
 
 execute "untar-drupal" do
