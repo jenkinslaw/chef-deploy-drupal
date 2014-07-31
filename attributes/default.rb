@@ -2,7 +2,7 @@
 ## Attribute:: default
 include_attribute 'deploy-drupal::get_project'
 include_attribute 'deploy-drupal::install'
-include_attribute 'deploy-drupal::download_drupal'
+include_attribute 'deploy-drupal::download'
 
 default['deploy-drupal']['version'] = '6'
 default['deploy-drupal']['minor_version'] = '30'
