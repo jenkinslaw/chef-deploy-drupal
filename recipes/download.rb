@@ -24,7 +24,7 @@ execute "untar-drupal" do
 end
 
 execute "install-project-from-path" do
-  command "cp -Rf '#{tmp_dir}/#{node['deploy-drupal']['project_name']}/.' '#{node['deploy-drupal']['project_root']}'"
+  command "rsync -av '#{tmp_dir}/#{node['deploy-drupal']['project_name']}/.' '#{node['deploy-drupal']['project_root']}' --exclude '#{node['deploy-drupal']['project_root']}/sites'"
   group node['deploy-drupal']['dev_goup']
   creates node['deploy-drupal']['drupal_root'] + "/index.php"
   not_if { File.exists? "#{node['deploy-drupal']['drupal_root']}/index.php" }
